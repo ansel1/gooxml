@@ -98,6 +98,15 @@ func (s Slide) ValidateWithPath(path string) error {
 	return nil
 }
 
+func (s Slide) Relationships() common.Relationships {
+	for i, os := range s.p.Slides() {
+		if os.x == s.x {
+			return s.p.slideRels[i]
+		}
+	}
+	panic("didn't find a slides relationship file for slide")
+}
+
 // AddTextBox adds an empty textbox to a slide.
 func (s Slide) AddTextBox() TextBox {
 	c := pml.NewCT_GroupShapeChoice()
