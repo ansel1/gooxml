@@ -8,12 +8,15 @@
 package presentation
 
 import (
+	"baliance.com/gooxml/common"
 	"baliance.com/gooxml/schema/soo/pml"
 )
 
 // SlideLayout
 type SlideLayout struct {
 	x *pml.SldLayout
+	p *Presentation
+	rels common.Relationships
 }
 
 // X returns the inner wrapped XML type.
@@ -32,4 +35,9 @@ func (s SlideLayout) Name() string {
 		return *s.x.CSld.NameAttr
 	}
 	return ""
+}
+
+// Relationships returns the relationships of the slide layout.
+func (s SlideLayout) Relationships() common.Relationships {
+	return s.rels
 }

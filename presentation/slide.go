@@ -24,6 +24,7 @@ type Slide struct {
 	sid *pml.CT_SlideIdListEntry
 	x   *pml.Sld
 	p   *Presentation
+	rels common.Relationships
 }
 
 // X returns the inner wrapped XML type.
@@ -99,12 +100,7 @@ func (s Slide) ValidateWithPath(path string) error {
 }
 
 func (s Slide) Relationships() common.Relationships {
-	for i, os := range s.p.Slides() {
-		if os.x == s.x {
-			return s.p.slideRels[i]
-		}
-	}
-	panic("didn't find a slides relationship file for slide")
+	return s.rels
 }
 
 // AddTextBox adds an empty textbox to a slide.

@@ -506,8 +506,8 @@ func (p *Presentation) SlideMasters() []SlideMaster {
 // SlideLayouts returns the slide layouts defined in the presentation.
 func (p *Presentation) SlideLayouts() []SlideLayout {
 	ret := []SlideLayout{}
-	for _, l := range p.layouts {
-		ret = append(ret, SlideLayout{l})
+	for i, l := range p.layouts {
+		ret = append(ret, SlideLayout{l, p, p.layoutRels[i]})
 	}
 	return ret
 }
@@ -636,7 +636,7 @@ func (p *Presentation) onNewRelationship(decMap *zippkg.DecodeMap, target, typ s
 func (p *Presentation) Slides() []Slide {
 	ret := []Slide{}
 	for i, v := range p.slides {
-		ret = append(ret, Slide{p.x.SldIdLst.SldId[i], v, p})
+		ret = append(ret, Slide{p.x.SldIdLst.SldId[i], v, p, p.slideRels[i]})
 	}
 	return ret
 }

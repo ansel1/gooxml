@@ -41,8 +41,13 @@ func (s SlideMaster) SlideLayouts() []SlideLayout {
 	for _, lid := range s.x.SldLayoutIdLst.SldLayoutId {
 		if idx, ok := nameToLayoutIdx[lid.RIdAttr]; ok {
 			lout := s.p.layouts[idx-1]
-			layouts = append(layouts, SlideLayout{lout})
+			layouts = append(layouts, SlideLayout{lout, s.p, s.p.layoutRels[idx-1]})
 		}
 	}
 	return layouts
+}
+
+// Relationships returns the relationships of the slide layout.
+func (s SlideMaster) Relationships() common.Relationships {
+	return s.Relationships()
 }
